@@ -1,0 +1,30 @@
+{
+  "id": "1904052",
+  "name": "imgPreview",
+  "font_family": "iconfont",
+  "css_prefix_text": "im-",
+  "description": "图片预览组件",
+  "glyphs": [
+    {
+      "icon_id": "742884",
+      "name": "下载",
+      "font_class": "xiazai",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "3503021",
+      "name": "顺时针",
+      "font_class": "shunshizhen",
+      "unicode": "e762",
+      "unicode_decimal": 59234
+    },
+    {
+      "icon_id": "3503022",
+      "name": "逆时针",
+      "font_class": "nishizhen",
+      "unicode": "e763",
+      "unicode_decimal": 59235
+    }
+  ]
+}
