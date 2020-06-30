@@ -1,13 +1,13 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # .npmignore
-#config
-#node_modules
-#src
-#scripts
-#public
-#.babelrc
-#.gitignore
+config
+node_modules
+src
+scripts
+public
+.babelrc
+.gitignore
 
 # dependencies
 /node_modules

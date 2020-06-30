@@ -11,6 +11,7 @@
  * 可选：hideDownload：隐藏图片下载功能
  */
 import React, {Component} from "react";
+import {render} from "react-dom";
 import './assets/iconfont/iconfont.css';
 import cssStyle from './index.module.scss';
 import demoImg from './assets/image/demo.jpg';
@@ -252,6 +253,7 @@ export default class ImgEnlargeAndRotate extends Component {
       <div>
         {/*工具：旋转，下载*/}
         <div className={cssStyle.toolDiv} style={{width}}>
+          <span className={cssStyle.noticeText}>鼠标移入图片区域可局部放大</span>
           {
             hideACW ? null :
               <i className={`iconfont im-nishizhen ${cssStyle.toolBtn}`}
