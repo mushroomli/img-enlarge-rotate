@@ -112,7 +112,7 @@ export default class ImgEnlargeAndRotate extends Component {
         parseFloat(maxImgWidth - (offsetX - halfBlockSize) * scale) + "px";
 
       newEnlargeStyle.top = rotateNum < 0 ?
-        parseFloat((height - offsetY - halfBlockSize) * scale + height) + "px" :
+        parseFloat((height - offsetY + halfBlockSize) * scale) + "px" :
         parseFloat(-(offsetY - halfBlockSize) * scale) + "px";
 
     } else if (Math.abs(rotateNum) % 4 === 2) {
@@ -246,7 +246,8 @@ export default class ImgEnlargeAndRotate extends Component {
   render() {
     const {magnifierOff, imgLoad, mouseBlockStyle, enlargeStyle, minImgStyle, maskBlockStyle} = this.state;
     const {
-      width = 600, height = 400, mouseBlockSize = 100, minImg = demoImg, maxImg = minImg, imgName = '图片',
+      width = 600, height = 400, mouseBlockSize = 100, scale = 4,
+      minImg = demoImg, maxImg = minImg, imgName = '图片',
       hideACW, hideCW, hideDownload, index = '', toolPosition = 'top'
     } = this.props;
 
@@ -301,7 +302,8 @@ export default class ImgEnlargeAndRotate extends Component {
 
           {/*大图容器*/}
           {magnifierOff && (
-            <div className={cssStyle.magnifierContainer} style={{left: width, width: height, height: height}}>
+            <div className={cssStyle.magnifierContainer}
+                 style={{left: width, width: mouseBlockSize * scale, height: mouseBlockSize * scale}}>
               <img
                 id={`maxImg${index}`}
                 className={cssStyle.largerImg}
