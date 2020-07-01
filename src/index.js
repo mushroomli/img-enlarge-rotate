@@ -251,7 +251,7 @@ export default class ImgEnlargeAndRotate extends Component {
     } = this.props;
 
     return (
-      <div>
+      <div style={{display: "inline-block"}}>
         {/*工具：旋转，下载*/}
         {
           toolPosition === 'top' ? <div className={cssStyle.toolDiv} style={{width}}>
