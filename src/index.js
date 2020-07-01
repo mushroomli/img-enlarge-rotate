@@ -9,6 +9,7 @@
  * 可选：hideACW：隐藏逆时针功能
  * 可选：hideCW：隐藏顺时针功能
  * 可选：hideDownload：隐藏图片下载功能
+ * 可选：index放置在轮播或者多图时
  */
 import React, {Component} from "react";
 import {render} from "react-dom";
@@ -54,18 +55,18 @@ export default class ImgEnlargeAndRotate extends Component {
 
   // 计算相关参数
   calculationBlock = (offsetX, offsetY) => {
-    const {scale = 4, width = 600, height = 400, mouseBlockSize = 100} = this.props;
+    const {scale = 4, width = 600, height = 400, mouseBlockSize = 100, index = ''} = this.props;
     let {enlargeStyle, rotateNum} = this.state;
 
     let newEnlargeStyle = JSON.parse(JSON.stringify(enlargeStyle));
     let newMouseBlockStyle = {};
 
     //放置原始图片的容器
-    let imgDivPosition = document.getElementById('minImgDiv').getBoundingClientRect();
+    let imgDivPosition = document.getElementById(`minImgDiv${index}`).getBoundingClientRect();
     //原始图片位置和宽高
-    let imgPosition = document.getElementById('minImg').getBoundingClientRect();
+    let imgPosition = document.getElementById(`minImg${index}`).getBoundingClientRect();
     //放大图片的位置和宽和高
-    let maxImgPosition = document.getElementById('maxImg').getBoundingClientRect();
+    let maxImgPosition = document.getElementById(`maxImg${index}`).getBoundingClientRect();
 
     //图片的左边原点
     let oLeft = imgPosition.left - imgDivPosition.left;
@@ -144,7 +145,7 @@ export default class ImgEnlargeAndRotate extends Component {
 
   //旋转图片
   rotateImg = (type) => {
-    const {width = 600, height = 400, scale = 4} = this.props;
+    const {width = 600, height = 400, scale = 4, index = ''} = this.props;
 
     let newMinImgStyle = {};
     let {rotateNum, enlargeStyle, maskBlockStyle} = this.state;
@@ -174,7 +175,7 @@ export default class ImgEnlargeAndRotate extends Component {
       rotateNum: rounds
     }, () => {
       //原始图片旋转后的位置和宽高
-      let imgPosition = document.getElementById('minImg').getBoundingClientRect();
+      let imgPosition = document.getElementById(`minImg${index}`).getBoundingClientRect();
       newMaskBlockStyle.width = imgPosition.width;
       newMaskBlockStyle.height = imgPosition.height;
       //旋转且平移回去
@@ -246,42 +247,45 @@ export default class ImgEnlargeAndRotate extends Component {
     const {magnifierOff, imgLoad, mouseBlockStyle, enlargeStyle, minImgStyle, maskBlockStyle} = this.state;
     const {
       width = 600, height = 400, mouseBlockSize = 100, minImg = demoImg, maxImg = minImg, imgName = '图片',
-      hideACW, hideCW, hideDownload
+      hideACW, hideCW, hideDownload, index = '', toolPosition = 'top'
     } = this.props;
 
     return (
       <div>
         {/*工具：旋转，下载*/}
-        <div className={cssStyle.toolDiv} style={{width}}>
-          <span className={cssStyle.noticeText}>鼠标移入图片区域可局部放大</span>
-          {
-            hideACW ? null :
-              <i className={`iconfont im-nishizhen ${cssStyle.toolBtn}`}
-                 title='逆时针旋转90度'
-                 onClick={() => this.rotateImg('antiClock')}/>
-          }
-          {
-            hideCW ? null :
-              <i className={`iconfont im-shunshizhen ${cssStyle.toolBtn}`}
-                 title='顺时针旋转90度'
-                 onClick={() => this.rotateImg()}/>
-          }
-          {
-            hideDownload ? null : <a id='oDownload'>
-              <i className={`iconfont im-xiazai ${cssStyle.toolBtn}`}
-                 title='下载图片到本地'
-                 onClick={() => this.saveImg(maxImg, imgName)}/>
-            </a>
-          }
+        {
+          toolPosition === 'top' ? <div className={cssStyle.toolDiv} style={{width}}>
+            <span className={cssStyle.noticeText}>鼠标移入图片区域可局部放大</span>
+            {
+              hideACW ? null :
+                <i className={`iconfont im-nishizhen ${cssStyle.toolBtn}`}
+                   title='逆时针旋转90度'
+                   onClick={() => this.rotateImg('antiClock')}/>
+            }
+            {
+              hideCW ? null :
+                <i className={`iconfont im-shunshizhen ${cssStyle.toolBtn}`}
+                   title='顺时针旋转90度'
+                   onClick={() => this.rotateImg()}/>
+            }
+            {
+              hideDownload ? null : <a id='oDownload'>
+                <i className={`iconfont im-xiazai ${cssStyle.toolBtn}`}
+                   title='下载图片到本地'
+                   onClick={() => this.saveImg(maxImg, imgName)}/>
+              </a>
+            }
 
 
-        </div>
+          </div> : null
+        }
+
 
         <div className={cssStyle.enlargeImg}>
 
           {/*原始图片容器*/}
-          <div id='minImgDiv' className={cssStyle.imgContainer} style={{width, height}}>
-            <img id='minImg' className={cssStyle.imgStyle} src={minImg} alt=""
+          <div id={`minImgDiv${index}`} className={cssStyle.imgContainer} style={{width, height}}>
+            <img id={`minImg${index}`} className={cssStyle.imgStyle} src={minImg} alt=""
                  style={{maxWidth: width, maxHeight: height, ...minImgStyle}}
             />
             <div className={cssStyle.maskBlock}
@@ -299,7 +303,7 @@ export default class ImgEnlargeAndRotate extends Component {
           {magnifierOff && (
             <div className={cssStyle.magnifierContainer} style={{left: width, width: height, height: height}}>
               <img
-                id='maxImg'
+                id={`maxImg${index}`}
                 className={cssStyle.largerImg}
                 style={{maxWidth: width, maxHeight: height, ...enlargeStyle}}
                 src={maxImg}
@@ -311,10 +315,40 @@ export default class ImgEnlargeAndRotate extends Component {
             </div>
           )}
         </div>
+
+
+        {/*工具：旋转，下载*/}
+        {
+          toolPosition === 'bottom' ? <div className={cssStyle.toolDiv} style={{width}}>
+            <span className={cssStyle.noticeText}>鼠标移入图片区域可局部放大</span>
+            {
+              hideACW ? null :
+                <i className={`iconfont im-nishizhen ${cssStyle.toolBtn}`}
+                   title='逆时针旋转90度'
+                   onClick={() => this.rotateImg('antiClock')}/>
+            }
+            {
+              hideCW ? null :
+                <i className={`iconfont im-shunshizhen ${cssStyle.toolBtn}`}
+                   title='顺时针旋转90度'
+                   onClick={() => this.rotateImg()}/>
+            }
+            {
+              hideDownload ? null : <a id='oDownload'>
+                <i className={`iconfont im-xiazai ${cssStyle.toolBtn}`}
+                   title='下载图片到本地'
+                   onClick={() => this.saveImg(maxImg, imgName)}/>
+              </a>
+            }
+
+
+          </div> : null
+        }
+
       </div>
 
     );
   }
 }
 
-// render(<ImgEnlargeAndRotate/>,document.getElementById('root'))
+// render(<ImgEnlargeAndRotate/>, document.getElementById('root'))

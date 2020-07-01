@@ -12,6 +12,8 @@
 |   hideACW  |     可选    |   隐藏逆时针旋转功能  |
 |   hideCW  |     可选    |   隐藏顺时针旋转功能   |
 |   hideDownload  |     可选    |   隐藏图片下载功能   |
+|   index  |     可选    |   一个页面多出使用时传不同index，用来保证唯一id   |
+|   toolPosition  |     可选    |  工具条的位置，默认top,支持top和bottom |
 
 ## usage
 `import ImgEnlargeAndRotate from 'img-enlarge-rotate';`
