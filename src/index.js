@@ -246,7 +246,7 @@ export default class ImgEnlargeAndRotate extends Component {
   render() {
     const {magnifierOff, imgLoad, mouseBlockStyle, enlargeStyle, minImgStyle, maskBlockStyle} = this.state;
     const {
-      width = 600, height = 400, mouseBlockSize = 100, scale = 4,
+      width = 600, height = 400, background = '#eee', mouseBlockSize = 100, scale = 4,
       minImg = demoImg, maxImg = minImg, imgName = '图片',
       hideACW, hideCW, hideDownload, index = '', toolPosition = 'top'
     } = this.props;
@@ -285,7 +285,7 @@ export default class ImgEnlargeAndRotate extends Component {
         <div className={cssStyle.enlargeImg}>
 
           {/*原始图片容器*/}
-          <div id={`minImgDiv${index}`} className={cssStyle.imgContainer} style={{width, height}}>
+          <div id={`minImgDiv${index}`} className={cssStyle.imgContainer} style={{width, height, background}}>
             <img id={`minImg${index}`} className={cssStyle.imgStyle} src={minImg} alt=""
                  style={{maxWidth: width, maxHeight: height, ...minImgStyle}}
             />

@@ -8,6 +8,7 @@
 |   scale  |     可选    |   放大倍数，默认是4   |
 |   width  |     可选    |   放置图片的容器宽，默认600   |
 |   height  |     可选    |   放置图片的容器高，默认400   |
+|   background  |     可选    |   放置图片的容器北京颜色，默认#eee   |
 |   mouseBlockSize  |     可选    |   移动的小滑块的size，默认100   |
 |   hideACW  |     可选    |   隐藏逆时针旋转功能  |
 |   hideCW  |     可选    |   隐藏顺时针旋转功能   |
