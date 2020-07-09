@@ -117,12 +117,12 @@ export default class ImgEnlargeAndRotate extends Component {
         parseFloat(maxImgWidth - (offsetX - halfBlockSize) * scale) + "px";
 
       newEnlargeStyle.top = rotateNum < 0 ?
-        parseFloat((height - offsetY + halfBlockSize) * scale) + "px" :
+        parseFloat(maxImgHeight - (offsetY - halfBlockSize) * scale) + "px" :
         parseFloat(-(offsetY - halfBlockSize) * scale) + "px";
 
     } else if (Math.abs(rotateNum) % 4 === 2) {
 
-      newEnlargeStyle.left = parseFloat((width - (offsetX - halfBlockSize)) * scale) + "px";
+      newEnlargeStyle.left = parseFloat(maxImgWidth - (offsetX - halfBlockSize) * scale) + "px";
       newEnlargeStyle.top = parseFloat(maxImgHeight - (offsetY - halfBlockSize) * scale) + "px";
 
     } else if (Math.abs(rotateNum) % 4 === 3) {
@@ -133,7 +133,7 @@ export default class ImgEnlargeAndRotate extends Component {
 
       newEnlargeStyle.top = rotateNum < 0 ?
         parseFloat(-(offsetY - halfBlockSize) * scale) + "px" :
-        parseFloat((height - (offsetY - halfBlockSize)) * scale) + "px";
+        parseFloat(maxImgHeight - (offsetY - halfBlockSize) * scale) + "px";
     }
 
 
