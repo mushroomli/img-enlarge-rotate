@@ -27,7 +27,9 @@ export default class ImgEnlargeAndRotate extends Component {
       imgLoad: false,
       mouseBlockStyle: {},//移动小方块的样式（主要是位置）
       enlargeStyle: {},//放大图片的样式（主要是放大的位置和旋转）
+
       minImgStyle: {},//原图片的样式（主要是放大的位置）
+
       maskBlockStyle: {},//遮罩的样式（为了实现小滑块在图片上移动的效果）
       rotateNum: 0,//旋转次数
     };
@@ -35,8 +37,11 @@ export default class ImgEnlargeAndRotate extends Component {
 
   // 鼠标移入
   mouseEnter = () => {
+    const {index = ''} = this.props;
+    let imgPosition = document.getElementById(`minImg${index}`).getBoundingClientRect();
     this.setState({
-      magnifierOff: true
+      magnifierOff: true,
+      maskBlockStyle: {width: imgPosition.width, height: imgPosition.height},//改变遮罩的大小保持和图片一致
     });
   };
 
@@ -245,6 +250,7 @@ export default class ImgEnlargeAndRotate extends Component {
 
   render() {
     const {magnifierOff, imgLoad, mouseBlockStyle, enlargeStyle, minImgStyle, maskBlockStyle} = this.state;
+
     const {
       width = 600, height = 400, background = '#eee', mouseBlockSize = 100, scale = 4,
       minImg = demoImg, maxImg = minImg, imgName = '图片',
