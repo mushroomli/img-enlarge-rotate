@@ -10,6 +10,8 @@
  * 可选：hideCW：隐藏顺时针功能
  * 可选：hideDownload：隐藏图片下载功能
  * 可选：index放置在轮播或者多图时
+ * 可选：toolPosition工具条的位置，默认top,支持top和bottom
+ * 可选：hideText隐藏文字：鼠标移入可局部放大
  */
 import React, {Component} from "react";
 import {render} from "react-dom";
@@ -254,7 +256,7 @@ export default class ImgEnlargeAndRotate extends Component {
     const {
       width = 600, height = 400, background = '#eee', mouseBlockSize = 100, scale = 4,
       minImg = demoImg, maxImg = minImg, imgName = '图片',
-      hideACW, hideCW, hideDownload, index = '', toolPosition = 'top'
+      hideACW, hideCW, hideDownload, index = '', toolPosition = 'top', hideText
     } = this.props;
 
     return (
@@ -262,7 +264,10 @@ export default class ImgEnlargeAndRotate extends Component {
         {/*工具：旋转，下载*/}
         {
           toolPosition === 'top' ? <div className={cssStyle.toolDiv} style={{width}}>
-            <span className={cssStyle.noticeText}>鼠标移入图片区域可局部放大</span>
+            {
+              hideText ? null : <span className={cssStyle.noticeText}>鼠标移入图片区域可局部放大</span>
+            }
+
             {
               hideACW ? null :
                 <i className={`iconfont im-nishizhen ${cssStyle.toolBtn}`}
@@ -328,7 +333,9 @@ export default class ImgEnlargeAndRotate extends Component {
         {/*工具：旋转，下载*/}
         {
           toolPosition === 'bottom' ? <div className={cssStyle.toolDiv} style={{width}}>
-            <span className={cssStyle.noticeText}>鼠标移入图片区域可局部放大</span>
+            {
+              hideText ? null : <span className={cssStyle.noticeText}>鼠标移入图片区域可局部放大</span>
+            }
             {
               hideACW ? null :
                 <i className={`iconfont im-nishizhen ${cssStyle.toolBtn}`}
