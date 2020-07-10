@@ -12,6 +12,7 @@
  * 可选：index放置在轮播或者多图时
  * 可选：toolPosition工具条的位置，默认top,支持top和bottom
  * 可选：hideText隐藏文字：鼠标移入可局部放大
+ * 可选：largeOnLeft设置放大图片在左边
  */
 import React, {Component} from "react";
 import {render} from "react-dom";
@@ -256,7 +257,8 @@ export default class ImgEnlargeAndRotate extends Component {
     const {
       width = 600, height = 400, background = '#eee', mouseBlockSize = 100, scale = 4,
       minImg = demoImg, maxImg = minImg, imgName = '图片',
-      hideACW, hideCW, hideDownload, index = '', toolPosition = 'top', hideText
+      hideACW, hideCW, hideDownload, index = '', toolPosition = 'top', hideText,
+      largeOnLeft
     } = this.props;
 
     return (
@@ -314,7 +316,11 @@ export default class ImgEnlargeAndRotate extends Component {
           {/*大图容器*/}
           {magnifierOff && (
             <div className={cssStyle.magnifierContainer}
-                 style={{left: width, width: mouseBlockSize * scale, height: mouseBlockSize * scale}}>
+                 style={{
+                   left: largeOnLeft ? -mouseBlockSize * scale : width,
+                   width: mouseBlockSize * scale,
+                   height: mouseBlockSize * scale
+                 }}>
               <img
                 id={`maxImg${index}`}
                 className={cssStyle.largerImg}

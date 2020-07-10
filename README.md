@@ -16,6 +16,7 @@
 |   index  |     可选    |   一个页面多出使用时传不同index，用来保证唯一id   |
 |   toolPosition  |     可选    |  工具条的位置，默认top,支持top和bottom |
 |   hideText  |     可选    |  隐藏：鼠标移入可局部放大提示文字 |
+|   largeOnLeft  |     可选    | largeOnLeft设置放大图片在左边,该参数用来在页面最右边使用该组件时使用 |
 
 ## usage
 `import ImgEnlargeAndRotate from 'img-enlarge-rotate';`
